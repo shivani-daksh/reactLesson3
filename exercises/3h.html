@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3h</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.7/babel.min.js"></script>
+
+    <script type="text/babel">
+
+
+      function App() {
+        const [inputText, setInputText] = React.useState("");
+        function inputName(event) {
+          setInputText(event.target.value);
+        }
+        function resettingInput() {
+          setInputText('');
+        }
+        function exampleInput() {
+          setInputText('Shivie');
+        }
+
+        return (
+          <>
+            <input placeholder="Type your name here" onChange={inputName} value={inputText}/>
+            <button onClick={resettingInput}>Reset</button>
+            <button onClick={exampleInput}>Example</button>
+            <p>Hello {inputText}</p>
+          </>
+        );
+      }
+
+      const container = document.querySelector(".js-container");
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>

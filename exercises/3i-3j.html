@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chatbot</title>
+    <title>3i-3j</title>
   </head>
   <body>
     <div class="js-container"></div>
@@ -17,17 +17,12 @@
     <script type="text/babel">
       function ChatInput({ chatMessages, setChatMessages }) {
         const [inputText, setInputText] = React.useState("");
-        const [isLoading, setIsLoading] = React.useState(false);
-
 
         function saveInputText(event) {
           setInputText(event.target.value);
         }
 
         async function sendMessage() {
-          if(isLoading || inputText === ''){
-            return;
-          }
           const newChatMessages = [
             ...chatMessages,
             {
@@ -36,18 +31,13 @@
               id: crypto.randomUUID(),
             },
           ];
-          // setChatMessages(newChatMessages);
-          setChatMessages([
-            ...newChatMessages,
-            {
-              message: 'Loading...',
-              sender: 'robot',
-              id: crypto.randomUUID()
-            }
-          ]);
-          setIsLoading(true);
-          setInputText("");
           
+        
+          setChatMessages(newChatMessages);
+          setInputText('');
+          
+
+
 
           const response = await Chatbot.getResponseAsync(inputText);
           //Chatbot is an object in the external library with getResponse method
@@ -59,15 +49,19 @@
               id: crypto.randomUUID(),
             },
           ]);
-          setIsLoading(false);
+
+          // setInputText('');
         }
 
         function handleKeyDown(event) {
-          if (event.key === "Enter") {
+           if(event.key === 'Enter'){
             sendMessage();
-          } else if (event.key === "Escape") {
-            setInputText("");
-          }
+           }
+           if(event.key === 'Escape'){
+            setInputText('');
+
+           }
+
         }
 
         return (
@@ -76,7 +70,7 @@
               placeholder="Send message to ChatBot"
               size="30"
               onChange={saveInputText}
-              onKeyDown={handleKeyDown}
+              onKeyDown = {handleKeyDown}
               value={inputText}
             />
             <button onClick={sendMessage}>Send</button>
@@ -133,12 +127,6 @@
             id: "id4",
           },
         ]);
-
-        //instead of saving it in a variable called array and then destructuring it we directly destructured it in the code above .
-        // const [chatMessages, setChatMessages] =  array;
-        //code above is a shortcut for these two lines of code.
-        //  const chatMessages =  array[0];
-        //  const setChatMessages =  array[1];
 
         return (
           <>

@@ -1,1 +1,2 @@
 4-april-2025 today i completed this lecture from superSimpleDev  but it was too long and i am not sure if i completely understood the concepts or not.
+25-april-2025 i revised this lecture and did it's exercises.
